@@ -4,6 +4,11 @@ import { Vote } from "@/components/Vote";
 import { db } from "@/db";
 
 export async function generateMetadata({params}) {
+  if (!params) {
+    return {
+      title:"post not found"
+    }
+  }
   const postId = params.postId;
 
   const {rows: product }=await db.query(
@@ -17,6 +22,11 @@ export async function generateMetadata({params}) {
     LIMIT 1;`,
     [postId]
   );
+  if (product.length ===0) {
+    return {
+      title: "post not found"
+    }
+  }
   
   return {
     title: `${product[0].title}`
