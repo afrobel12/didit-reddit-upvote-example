@@ -3,35 +3,35 @@ import { CommentList } from "@/components/CommentList";
 import { Vote } from "@/components/Vote";
 import { db } from "@/db";
 
-export async function generateMetadata({params}) {
-  if (!params) {
-    return {
-      title:"post not found"
-    }
-  }
-  const postId = params.postId;
+// export async function generateMetadata({params}) {
+//   if (!params) {
+//     return {
+//       title:"post not found"
+//     }
+//   }
+//   const postId = params.postId;
 
-  const {rows: product }=await db.query(
-    `SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, 
-    COALESCE(SUM(votes.vote), 0) AS vote_total
-    FROM posts
-    JOIN users ON posts.user_id = users.id
-    LEFT JOIN votes ON votes.post_id = posts.id
-    WHERE posts.id = $1
-    GROUP BY posts.id, users.name
-    LIMIT 1;`,
-    [postId]
-  );
-  if (product.length ===0) {
-    return {
-      title: "post not found"
-    }
-  }
+//   const {rows: product }=await db.query(
+//     `SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, 
+//     COALESCE(SUM(votes.vote), 0) AS vote_total
+//     FROM posts
+//     JOIN users ON posts.user_id = users.id
+//     LEFT JOIN votes ON votes.post_id = posts.id
+//     WHERE posts.id = $1
+//     GROUP BY posts.id, users.name
+//     LIMIT 1;`,
+//     [postId]
+//   );
+//   if (product.length ===0) {
+//     return {
+//       title: "post not found"
+//     }
+//   }
   
-  return {
-    title: `${product[0].title}`
-  }
-}
+//   return {
+//     title: `${product[0].title}`
+//   }
+// }
 
 
 export default async function SinglePostPage({ params }) {
