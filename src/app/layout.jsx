@@ -1,14 +1,19 @@
 import { Inter } from "next/font/google";
 import { UserInfo } from "../components/UserInfo";
 
+
 import "./globals.css";
 import Link from "next/link";
 import { Providers } from "@/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Didit",
+export const metadata= {
+  title: {
+         default: "Didit",
+         template:"%s"
+},
+
   description: "A social app like Reddit or Hacker News",
 };
 
