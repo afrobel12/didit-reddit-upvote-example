@@ -45,7 +45,7 @@ export default async function Home() {
           placeholder="Post title..."
           className="text-black px-3 py-2 rounded"
         />
-        <textarea
+        <Tiptap
           name="content"
           className="text-black px-3 py-2 rounded"
           placeholder="Post content"
